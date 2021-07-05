@@ -62,7 +62,6 @@ public class ArrayList<T> implements List<T>, Iterable<T> {
      * @param element to be added in the list
      * @param index   the index at which the element is to be added
      */
-    @Override
     public void addAtIndex(T element, int index) {
         // Check for out of bounds
         if (index < 0 || index >= size) {
@@ -106,7 +105,6 @@ public class ArrayList<T> implements List<T>, Iterable<T> {
      * @param index at which the element is to be removed
      * @return true, if the element is removed, false otherwise
      */
-    @Override
     @SuppressWarnings("unchecked")
     public T removeAtIndex(int index) {
         // Check for out of bounds
@@ -140,7 +138,6 @@ public class ArrayList<T> implements List<T>, Iterable<T> {
      * @param index at which the element is needed
      * @return element at the specified index, null otherwise
      */
-    @Override
     @SuppressWarnings("unchecked")
     public T get(int index) {
         // Check for out of bounds
@@ -154,7 +151,6 @@ public class ArrayList<T> implements List<T>, Iterable<T> {
      * @param element to be updated
      * @param index   at which the element is to be updated
      */
-    @Override
     public void set(T element, int index) {
         // Check for out of bounds
         if (index < 0 || index >= size) {
