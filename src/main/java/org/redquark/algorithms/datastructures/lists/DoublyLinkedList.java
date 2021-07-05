@@ -3,14 +3,14 @@ package org.redquark.algorithms.datastructures.lists;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedList<T> implements List<T>, Iterable<T> {
+public class DoublyLinkedList<T> implements List<T>, Iterable<T> {
 
     // Head of the linked list
     public ListNode<T> head;
-    // Size of the list
+    // Size of list
     private int size;
 
-    public LinkedList() {
+    public DoublyLinkedList() {
         this.size = 0;
         this.head = null;
     }
@@ -28,7 +28,7 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
      */
     @Override
     public boolean isEmpty() {
-        return size == 0;
+        return this.size == 0;
     }
 
     /**
@@ -37,9 +37,8 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
      */
     @Override
     public boolean contains(T element) {
-        // Reference to the head
+        // Check each node one by one
         ListNode<T> temp = head;
-        // Loop through the linked list to check each element
         while (temp != null) {
             if (temp.data.equals(element)) {
                 return true;
@@ -50,38 +49,43 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
     }
 
     /**
-     * @param element to be added in the list at the last
+     * @param element to be added in the list at the end
      */
     @Override
     public void add(T element) {
-        // Create a new node with the given data
+        // Create a new node with the given element
         ListNode<T> node = new ListNode<>(element);
-        // Base case when head is null
+        // Special case
         if (head == null) {
             head = node;
             size++;
             return;
         }
-        // Reference to the head
+        // Reference of the head node
         ListNode<T> temp = head;
-        // Loop through the linked list to get the last element
+        // Loop until we reach to the end of the list
         while (temp.next != null) {
             temp = temp.next;
         }
-        // Make the next of last node as the new node
         temp.next = node;
+        node.previous = temp;
         size++;
     }
 
     /**
-     * @param element to be added at the front of list
+     * @param element to be added at the front of the list
      */
     public void addFirst(T element) {
         // Create a new node with the given data
         ListNode<T> node = new ListNode<>(element);
-        // Make the current head as the next of this node
+        // Special case
+        if (head == null) {
+            head = node;
+            size++;
+            return;
+        }
         node.next = head;
-        // Make this node as the new head
+        head.previous = node;
         head = node;
         size++;
     }
@@ -109,6 +113,7 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
         ListNode<T> nextNode = temp.next;
         // Insert the given node in the list
         temp.next = newNode;
+        newNode.previous = temp;
         // Link this node with the previous next node
         newNode.next = nextNode;
         size++;
@@ -127,6 +132,7 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
         // For head
         if (head.data.equals(element)) {
             head = head.next;
+            head.previous = null;
             return element;
         }
         // Find the reference of the given node in the list
@@ -139,6 +145,7 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
         }
         // Remove the node by skipping it
         if (temp.next != null) {
+            // Next node of given node
             temp.next = temp.next.next;
         }
         size--;
@@ -146,7 +153,7 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
     }
 
     /**
-     * @return last element which will be removed
+     * @return removed element from the last
      */
     public T removeLast() {
         // Base case
@@ -182,6 +189,9 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
         T data = head.data;
         // Move head to the next pointer
         head = head.next;
+        if (head != null) {
+            head.previous = null;
+        }
         size--;
         return data;
     }
@@ -191,8 +201,8 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
      */
     @Override
     public void clear() {
-        head = null;
         size = 0;
+        head = null;
     }
 
     /**
@@ -240,8 +250,8 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
     }
 
     static class ListNode<T> {
-
         T data;
+        ListNode<T> previous;
         ListNode<T> next;
 
         ListNode(T data) {
