@@ -10,7 +10,6 @@ repositories {
 }
 
 tasks.register("runOnGitHub") {
-    dependsOn(":app:testDebugUnitTest")
     group = "custom"
 }
 
