@@ -2,19 +2,16 @@ package org.redquark.algorithms.datastructures.stacks;
 
 import java.util.Iterator;
 
-public class ArrayBasedStack<T> implements Stack<T>, Iterable<T> {
+public class ListBasedStack<T> implements Stack<T>, Iterable<T> {
 
-    // Internal array to store stack elements
-    private final Object[] elements;
-    // Maximum capacity of the stack
-    private final int capacity;
+    // Top of the stack (head of the list)
+    public StackNode<T> top;
     // Size of the stack
     private int size;
 
-    public ArrayBasedStack(int capacity) {
-        this.capacity = capacity;
+    public ListBasedStack() {
         this.size = 0;
-        this.elements = new Object[capacity];
+        this.top = null;
     }
 
     /**
@@ -30,7 +27,7 @@ public class ArrayBasedStack<T> implements Stack<T>, Iterable<T> {
      */
     @Override
     public boolean isEmpty() {
-        return size == 0;
+        return top == null;
     }
 
     /**
@@ -39,11 +36,14 @@ public class ArrayBasedStack<T> implements Stack<T>, Iterable<T> {
      */
     @Override
     public boolean contains(T element) {
-        // Search in the array to find element
-        for (int i = 0; i < size; i++) {
-            if (elements[i].equals(element)) {
+        // Reference of the top
+        StackNode<T> temp = top;
+        // Compare with each element in the stack
+        while (temp != null) {
+            if (temp.data.equals(element)) {
                 return true;
             }
+            temp = temp.next;
         }
         return false;
     }
@@ -55,13 +55,11 @@ public class ArrayBasedStack<T> implements Stack<T>, Iterable<T> {
      */
     @Override
     public void push(T element) {
-        // Check if the array is already full
-        if (size == capacity) {
-            throw new StackOverflowError("Stack is full, cannot add");
-        }
-        // Else store the element at the top of the array
-        elements[size] = element;
-        // Update the size
+        // Create a new node with the given data
+        StackNode<T> node = new StackNode<>(element);
+        // Update the top
+        node.next = top;
+        top = node;
         size++;
     }
 
@@ -71,17 +69,18 @@ public class ArrayBasedStack<T> implements Stack<T>, Iterable<T> {
      * @return the top of the stack
      */
     @Override
-    @SuppressWarnings("unchecked")
     public T pop() {
         // Check if the stack is empty
-        if (size == 0) {
-            throw new IndexOutOfBoundsException("Stack is empty. Cannot pop!");
+        if (top == null) {
+            throw new IndexOutOfBoundsException("Stack is empty");
         }
-        // Else return the top of the stack
-        T top = (T) elements[size - 1];
-        elements[size - 1] = null;
+        StackNode<T> currentTop = top;
+        // Update the top
+        top = top.next;
+        // Update the size
         size--;
-        return top;
+        // Get the data from the top
+        return currentTop.data;
     }
 
     /**
@@ -90,27 +89,20 @@ public class ArrayBasedStack<T> implements Stack<T>, Iterable<T> {
      * @return the top of the stack
      */
     @Override
-    @SuppressWarnings("unchecked")
     public T peek() {
         // Check if the stack is empty
-        if (size == 0) {
-            throw new IndexOutOfBoundsException("Stack is empty. Cannot peek!");
+        if (top == null) {
+            throw new IndexOutOfBoundsException("Stack is empty");
         }
-        // Else return the top of the stack
-        return (T) elements[size - 1];
+        return top.data;
     }
-
 
     /**
      * Empties the stack by removing all the elements from it
      */
     @Override
     public void clear() {
-        // Make everything null in the elements array
-        for (int i = 0; i < capacity; i++) {
-            elements[i] = null;
-        }
-        // Update the size to zero
+        top = null;
         size = 0;
     }
 
@@ -118,22 +110,22 @@ public class ArrayBasedStack<T> implements Stack<T>, Iterable<T> {
      * @return Returns an iterator over the elements in this stack in proper sequence.
      */
     @Override
-    @SuppressWarnings("unchecked")
     public Iterator<T> iterator() {
-
         return new Iterator<>() {
 
-            // Index of the next element to return
-            int cursor = size - 1;
+            // Reference of the top
+            StackNode<T> temp = top;
 
             @Override
             public boolean hasNext() {
-                return cursor != -1;
+                return temp != null;
             }
 
             @Override
             public T next() {
-                return (T) elements[cursor--];
+                T data = temp.data;
+                temp = temp.next;
+                return data;
             }
         };
     }
@@ -148,10 +140,22 @@ public class ArrayBasedStack<T> implements Stack<T>, Iterable<T> {
         }
         StringBuilder output = new StringBuilder();
         output.append("[");
-        for (int i = size - 1; i > 0; i--) {
-            output.append(elements[i]).append(", ");
+        // Reference of the top
+        StackNode<T> temp = top;
+        while (temp.next != null) {
+            output.append(temp.data).append(", ");
+            temp = temp.next;
         }
-        output.append(elements[0]).append("]");
+        output.append(temp.data).append("]");
         return output.toString();
+    }
+
+    static class StackNode<T> {
+        T data;
+        StackNode<T> next;
+
+        StackNode(T data) {
+            this.data = data;
+        }
     }
 }

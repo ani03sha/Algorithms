@@ -94,24 +94,26 @@ public class ArrayBasedStackTest {
     @Test
     public void testIterator() {
         Iterator<Integer> iterator = testArrayBasedStack.iterator();
-        Integer element = 1;
+        Integer element = 5;
         while (iterator.hasNext()) {
             assertEquals(element, iterator.next());
-            element++;
+            element--;
         }
     }
 
     @Test
     public void testToString() {
-        String expected = "[1, 2, 3, 4, 5]";
+        String expected = "[5, 4, 3, 2, 1]";
         assertEquals(expected, testArrayBasedStack.toString());
         testArrayBasedStack.pop();
-        expected = "[1, 2, 3, 4]";
+        expected = "[4, 3, 2, 1]";
         assertEquals(expected, testArrayBasedStack.toString());
         testArrayBasedStack.peek();
         assertEquals(expected, testArrayBasedStack.toString());
         testArrayBasedStack.push(7);
-        expected = "[1, 2, 3, 4, 7]";
+        expected = "[7, 4, 3, 2, 1]";
         assertEquals(expected, testArrayBasedStack.toString());
+        testArrayBasedStack.clear();
+        assertEquals("[]", testArrayBasedStack.toString());
     }
 }
