@@ -81,7 +81,7 @@ public class ArrayBasedQueue<T> implements Queue<T>, Iterable<T> {
     public T poll() {
         // Check if the queue is empty
         if (isEmpty()) {
-            throw new IndexOutOfBoundsException("Queue is empty. Cannot delete");
+            throw new IndexOutOfBoundsException("Queue is empty. Cannot poll!");
         }
         Object data = elements[front];
         elements[front] = null;
@@ -104,7 +104,7 @@ public class ArrayBasedQueue<T> implements Queue<T>, Iterable<T> {
     public T peek() {
         // Check if the queue is empty
         if (isEmpty()) {
-            throw new IndexOutOfBoundsException("Queue is empty. Cannot delete");
+            throw new IndexOutOfBoundsException("Queue is empty. Cannot peek!");
         }
         return (T) elements[front];
     }

@@ -103,7 +103,7 @@ public class ListBasedQueue<T> implements Queue<T>, Iterable<T> {
     public T peek() {
         // Check for the empty queue
         if (rear == null) {
-            throw new IndexOutOfBoundsException("Queue is empty. Cannot poll!");
+            throw new IndexOutOfBoundsException("Queue is empty. Cannot peek!");
         }
         // Return the data stored in the front
         return front.data;
