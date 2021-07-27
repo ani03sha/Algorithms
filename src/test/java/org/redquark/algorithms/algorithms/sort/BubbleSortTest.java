@@ -3,6 +3,7 @@ package org.redquark.algorithms.algorithms.sort;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class BubbleSortTest {
 
@@ -17,5 +18,10 @@ public class BubbleSortTest {
         data = new Integer[]{64, 34, 25, 12, 22, 11, 90};
         expected = new Integer[]{11, 12, 22, 25, 34, 64, 90};
         assertArrayEquals(expected, testBubbleSort.sort(data));
+
+        data = new Integer[]{};
+        assertNull(testBubbleSort.sort(data));
+
+        assertNull(testBubbleSort.sort(null));
     }
 }
