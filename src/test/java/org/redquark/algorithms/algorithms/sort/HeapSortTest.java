@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class HeapSortTest {
 
-    private final HeapSort<Integer> testHeapSort = new HeapSort<>();
+    private final Sort<Integer> testHeapSort = new HeapSort<>();
 
     @Test
     public void testSort() {
