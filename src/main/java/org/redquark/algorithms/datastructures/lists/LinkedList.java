@@ -159,13 +159,18 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
             size--;
             return data;
         }
-        // Traverse the list to go to the lost
+        // Traverse the list to go to the second last node
+        // so that the last node can be removed by pointing
+        // second last node's next to null
         ListNode<T> temp = head;
         while (temp.next.next != null) {
             temp = temp.next;
         }
+        // Store the data of the last node to return
         T data = temp.next.data;
+        // End the list after current second last node
         temp.next = null;
+        // Update the size
         size--;
         return data;
     }
