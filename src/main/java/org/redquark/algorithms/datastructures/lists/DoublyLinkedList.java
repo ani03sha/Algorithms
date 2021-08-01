@@ -111,6 +111,8 @@ public class DoublyLinkedList<T> implements List<T>, Iterable<T> {
         ListNode<T> newNode = new ListNode<>(element);
         // Get the next element of this node
         ListNode<T> nextNode = temp.next;
+        //Link the new node with previous of next node
+        nextNode.previous = newNode;
         // Insert the given node in the list
         temp.next = newNode;
         newNode.previous = temp;
