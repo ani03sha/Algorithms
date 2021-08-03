@@ -95,10 +95,6 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
         }
         // Create a new node with the given data
         ListNode<T> newNode = new ListNode<>(element);
-        if(temp == tail) {
-            tail = newNode;
-            tail.next = head;
-        }
         // Get the next element of this node
         ListNode<T> nextNode = temp.next;
         // Insert the given node in the list
@@ -124,6 +120,21 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
             size--;
             return element;
         }
+
+        if(tail.data == element) {
+            //Find reference to element prior to tail
+            ListNode<T> temp = head;
+            while(temp.next!=tail) {
+                temp = temp.next;
+            }
+
+            T data = tail.data;
+            tail = temp;
+            tail.next = head;
+            size--;
+            return data;
+        }
+
         // Find the reference of the given node in the list
         ListNode<T> temp = head;
         while (temp.next != null) {

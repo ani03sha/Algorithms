@@ -72,13 +72,12 @@ public class CircularLinkedListTest {
         assertEquals(11, testCircularLinkedList.head.next.next.next.next.next.data);
         assertEquals(6, testCircularLinkedList.head.next.next.next.next.next.next.data);
         assertThrows(IllegalArgumentException.class, () -> testCircularLinkedList.addAfterNode(20, 12));
-        testCircularLinkedList.addAfterNode(100,10);
-        assertEquals(100, testCircularLinkedList.tail.data);
     }
 
     @Test
     public void testRemove() {
         assertEquals(10, testCircularLinkedList.remove(10));
+        assertEquals(9,testCircularLinkedList.tail.data);
         assertFalse(testCircularLinkedList.contains(10));
         assertEquals(9, testCircularLinkedList.size());
         assertThrows(IllegalArgumentException.class, () -> testCircularLinkedList.remove(10));
