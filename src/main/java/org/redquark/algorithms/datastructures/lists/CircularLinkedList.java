@@ -129,16 +129,14 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
         }
         // Find the reference of the given node in the list
         ListNode<T> temp = head;
-        while (temp.next != null) {
+        do {
             if (temp.next.data.equals(element)) {
                 break;
             }
             temp = temp.next;
-        }
+        } while (temp.next != head);
         // Remove the node by skipping it
-        if (temp.next != null) {
-            temp.next = temp.next.next;
-        }
+        temp.next = temp.next.next;
         size--;
         return element;
     }
