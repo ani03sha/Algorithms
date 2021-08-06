@@ -70,8 +70,13 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
             size++;
             return;
         }
-        tail.next = node;
+        // Current tail
+        ListNode<T> currentTail = tail;
+        // Point next of current tail to the new node that we created.
+        currentTail.next = node;
+        // Update the tail
         tail = node;
+        // Join the tail with head
         tail.next = head;
         size++;
     }
@@ -86,13 +91,15 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
             throw new IllegalArgumentException("Given node doesn't exist in the list");
         }
         // Reference of the first node
-        ListNode<T> temp = tail.next;
-        while (temp.next != null) {
+        ListNode<T> temp = head;
+        // Traverse through the list to find out the given
+        // elementInTheList node and stop the iteration.
+        do {
             if (temp.data.equals(elementInTheList)) {
                 break;
             }
             temp = temp.next;
-        }
+        } while (temp != head);
         // Create a new node with the given data
         ListNode<T> newNode = new ListNode<>(element);
         // Get the next element of this node
