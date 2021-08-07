@@ -121,16 +121,20 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
             return element;
         }
 
-        if(tail.data == element) {
+        //Check if tail is to be removed
+        if (tail.data == element) {
             //Find reference to element prior to tail
             ListNode<T> temp = head;
-            while(temp.next!=tail) {
+            while (temp.next != tail) {
                 temp = temp.next;
             }
-
+            //Fetch tail value to return
             T data = tail.data;
+            //Update the tail reference to the new tail
             tail = temp;
+            //Update new tail's next pointer to head
             tail.next = head;
+            //Reduce the size by 1
             size--;
             return data;
         }
