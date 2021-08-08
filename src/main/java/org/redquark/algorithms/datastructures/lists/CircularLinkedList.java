@@ -102,7 +102,7 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
         } while (temp != head);
         // Create a new node with the given data
         ListNode<T> newNode = new ListNode<>(element);
-        if(temp == tail) {
+        if (temp == tail) {
             tail = newNode;
             tail.next = head;
         }
@@ -139,6 +139,10 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
             }
             temp = temp.next;
         } while (temp.next != head);
+        // Check if the removed element is the tail
+        if (temp.next == tail) {
+            tail = temp;
+        }
         // Remove the node by skipping it
         temp.next = temp.next.next;
         size--;
@@ -186,11 +190,11 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
         StringBuilder output = new StringBuilder();
         output.append("[");
         // Reference of the head
-        ListNode<T> temp = tail.next;
-        while (temp.next != tail) {
+        ListNode<T> temp = head;
+        do {
             output.append(temp.data).append(", ");
             temp = temp.next;
-        }
+        } while (temp.next != head);
         output.append(temp.data).append("]");
         return output.toString();
     }

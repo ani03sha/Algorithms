@@ -81,6 +81,7 @@ public class CircularLinkedListTest {
         assertEquals(10, testCircularLinkedList.remove(10));
         assertFalse(testCircularLinkedList.contains(10));
         assertEquals(9, testCircularLinkedList.size());
+        assertEquals(9, testCircularLinkedList.remove(9));
         assertThrows(IllegalArgumentException.class, () -> testCircularLinkedList.remove(10));
     }
 
@@ -106,13 +107,13 @@ public class CircularLinkedListTest {
 
     @Test
     public void testToString() {
-        String expected = "[1, 2, 3, 4, 5, 6, 7, 8, 9]";
+        String expected = "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]";
         assertEquals(expected, testCircularLinkedList.toString());
         testCircularLinkedList.add(11);
-        expected = "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]";
+        expected = "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]";
         assertEquals(expected, testCircularLinkedList.toString());
         testCircularLinkedList.remove(6);
-        expected = "[1, 2, 3, 4, 5, 7, 8, 9, 10]";
+        expected = "[1, 2, 3, 4, 5, 7, 8, 9, 10, 11]";
         assertEquals(expected, testCircularLinkedList.toString());
     }
 }
