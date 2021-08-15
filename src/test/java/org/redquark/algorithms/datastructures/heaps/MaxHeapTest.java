@@ -10,82 +10,82 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MaxHeapTest {
 
-    private final MaxHeap<Integer> testMinHeap = new MaxHeap<>();
+    private final MaxHeap<Integer> testMaxHeap = new MaxHeap<>();
 
     @BeforeEach
     public void setUp() {
         for (int i = 0; i <= 9; i++) {
-            testMinHeap.push(i);
+            testMaxHeap.push(i);
         }
     }
 
     @Test
     public void testSize() {
-        assertEquals(10, testMinHeap.size());
-        testMinHeap.push(-4);
-        assertEquals(11, testMinHeap.size());
-        testMinHeap.poll();
-        assertEquals(10, testMinHeap.size());
+        assertEquals(10, testMaxHeap.size());
+        testMaxHeap.push(-4);
+        assertEquals(11, testMaxHeap.size());
+        testMaxHeap.poll();
+        assertEquals(10, testMaxHeap.size());
     }
 
     @Test
     public void testIsEmpty() {
-        assertFalse(testMinHeap.isEmpty());
-        testMinHeap.clear();
-        assertTrue(testMinHeap.isEmpty());
+        assertFalse(testMaxHeap.isEmpty());
+        testMaxHeap.clear();
+        assertTrue(testMaxHeap.isEmpty());
     }
 
     @Test
     public void testContains() {
         for (int i = 0; i <= 9; i++) {
-            assertTrue(testMinHeap.contains(i));
+            assertTrue(testMaxHeap.contains(i));
         }
-        assertFalse(testMinHeap.contains(-4));
-        testMinHeap.push(-4);
-        assertTrue(testMinHeap.contains(-4));
-        testMinHeap.poll();
-        testMinHeap.poll();
-        assertFalse(testMinHeap.contains(8));
+        assertFalse(testMaxHeap.contains(-4));
+        testMaxHeap.push(-4);
+        assertTrue(testMaxHeap.contains(-4));
+        testMaxHeap.poll();
+        testMaxHeap.poll();
+        assertFalse(testMaxHeap.contains(8));
     }
 
     @Test
     public void testPush() {
         for (int i = 10; i <= 19; i++) {
-            testMinHeap.push(i);
-            assertTrue(testMinHeap.contains(i));
-            assertEquals(i + 1, testMinHeap.size());
+            testMaxHeap.push(i);
+            assertTrue(testMaxHeap.contains(i));
+            assertEquals(i + 1, testMaxHeap.size());
         }
     }
 
     @Test
     public void testPoll() {
         for (int i = 9; i >= 0; i--) {
-            assertTrue(testMinHeap.contains(i));
-            assertEquals(i, testMinHeap.poll());
-            assertFalse(testMinHeap.contains(i));
+            assertTrue(testMaxHeap.contains(i));
+            assertEquals(i, testMaxHeap.poll());
+            assertFalse(testMaxHeap.contains(i));
         }
-        assertThrows(IndexOutOfBoundsException.class, testMinHeap::poll);
+        assertThrows(IndexOutOfBoundsException.class, testMaxHeap::poll);
     }
 
     @Test
     public void testPeek() {
-        assertEquals(9, testMinHeap.peek());
-        testMinHeap.push(14);
-        assertEquals(14, testMinHeap.peek());
-        testMinHeap.poll();
-        assertEquals(9, testMinHeap.peek());
-        testMinHeap.poll();
-        testMinHeap.poll();
-        assertEquals(7, testMinHeap.peek());
-        testMinHeap.clear();
-        assertThrows(IndexOutOfBoundsException.class, testMinHeap::peek);
+        assertEquals(9, testMaxHeap.peek());
+        testMaxHeap.push(14);
+        assertEquals(14, testMaxHeap.peek());
+        testMaxHeap.poll();
+        assertEquals(9, testMaxHeap.peek());
+        testMaxHeap.poll();
+        testMaxHeap.poll();
+        assertEquals(7, testMaxHeap.peek());
+        testMaxHeap.clear();
+        assertThrows(IndexOutOfBoundsException.class, testMaxHeap::peek);
     }
 
     @Test
     public void testClear() {
-        assertFalse(testMinHeap.isEmpty());
-        testMinHeap.clear();
-        assertTrue(testMinHeap.isEmpty());
+        assertFalse(testMaxHeap.isEmpty());
+        testMaxHeap.clear();
+        assertTrue(testMaxHeap.isEmpty());
     }
 
 }
