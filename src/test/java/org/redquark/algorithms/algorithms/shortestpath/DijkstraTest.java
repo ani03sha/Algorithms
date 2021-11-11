@@ -3,6 +3,7 @@ package org.redquark.algorithms.algorithms.shortestpath;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DijkstraTest {
 
@@ -26,5 +27,7 @@ public class DijkstraTest {
         source = 4;
         expected = new int[]{4, 5, 3, 4, 0, 2, 3};
         assertArrayEquals(expected, testDijkstra.findShortestPath(graph, source));
+
+        assertThrows(IllegalArgumentException.class, () -> testDijkstra.findShortestPath(null, 0));
     }
 }
