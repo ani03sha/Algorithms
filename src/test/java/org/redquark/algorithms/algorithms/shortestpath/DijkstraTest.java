@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class DijkstraTest {
 
-    private final Dijkstra testDijkstra = new Dijkstra();
+    private final ShortestPath testDijkstra = new Dijkstra();
 
     @Test
     public void testFindShortestPath() {

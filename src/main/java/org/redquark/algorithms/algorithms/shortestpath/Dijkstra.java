@@ -11,6 +11,10 @@ public class Dijkstra implements ShortestPath {
      */
     @Override
     public int[] findShortestPath(int[][] graph, int source) {
+        // Special case
+        if (graph == null || graph.length == 0) {
+            throw new IllegalArgumentException("Invalid adjacency matrix");
+        }
         // Total number of vertices in the graph
         int n = graph.length;
         // Boolean array to store the visited vertices
