@@ -130,7 +130,7 @@ public class ArrayBasedQueue<T> implements Queue<T>, Iterable<T> {
     @Override
     @SuppressWarnings("unchecked")
     public Iterator<T> iterator() {
-        return new Iterator<>() {
+        return new Iterator<T>() {
 
             int cursor = 0;
 

@@ -166,7 +166,7 @@ public class ArrayList<T> implements List<T>, Iterable<T> {
     @SuppressWarnings("unchecked")
     public Iterator<T> iterator() {
 
-        return new Iterator<>() {
+        return new Iterator<T>() {
             // Index of the next element to return
             int cursor = 0;
 

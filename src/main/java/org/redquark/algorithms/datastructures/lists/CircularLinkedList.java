@@ -164,7 +164,7 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
      */
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<>() {
+        return new Iterator<T>() {
             // Reference of the first node
             ListNode<T> current = tail.next;
 
