@@ -111,7 +111,7 @@ public class ListBasedStack<T> implements Stack<T>, Iterable<T> {
      */
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<>() {
+        return new Iterator<T>() {
 
             // Reference of the top
             StackNode<T> temp = top;

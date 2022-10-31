@@ -126,7 +126,7 @@ public class ListBasedQueue<T> implements Queue<T>, Iterable<T> {
      */
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<>() {
+        return new Iterator<T>() {
 
             // Reference to the front
             QueueNode<T> cursor = front;
@@ -160,7 +160,9 @@ public class ListBasedQueue<T> implements Queue<T>, Iterable<T> {
             output.append(temp.data).append(", ");
             temp = temp.next;
         }
-        output.append(temp.data).append("]");
+        if (temp != null) {
+            output.append(temp.data).append("]");
+        }
         return output.toString();
     }
 

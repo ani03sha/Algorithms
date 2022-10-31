@@ -205,7 +205,7 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
      */
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<>() {
+        return new Iterator<T>() {
             // Reference of the head
             ListNode<T> current = head;
 
